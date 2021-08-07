@@ -24,7 +24,7 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-// If this file is called directly then abort.
+// If not called from WordPress then abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
