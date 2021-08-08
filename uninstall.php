@@ -5,13 +5,14 @@
  * @package WP_Post_Status
  */
 
-// If not called from WordPress then abort.
+// If uninstall not called from WordPress then abort.
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	die;
 }
 
-if ( is_multisite() ) {
-	
-} else {
-	
+// Load uninsallation class.
+if ( ! class_exists( '\\WP_Post_Status\\Core\\Installer' ) ) {
+	include_once plugin_dir_path( __FILE__ ) . '/core/class-installer.php';
 }
+WP_Post_Status\Core\Installer::get_instance()->uninstall();
+
