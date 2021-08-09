@@ -42,7 +42,7 @@ if ( ! defined( 'WP_POST_STATUS_URL' ) ) {
 	define( 'WP_POST_STATUS_URL', plugin_dir_url( __FILE__ ) );
 }
 if ( ! defined( 'WP_POST_STATUS_PREFIX' ) ) {
-	define( 'WP_POST_STATUS_PREFIX', 'wp-post-status-' );
+	define( 'WP_POST_STATUS_PREFIX', 'wp_post_status_' );
 }
 
 // Initialize the plugin and load the plugin instance.

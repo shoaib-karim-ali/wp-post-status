@@ -24,7 +24,7 @@ class Init {
 	 */
 	public static function get_services() {
 		return array(
-			// Namespace\ClassName::class,
+			\WP_Post_Status\App\Controllers\Tool_Controller::class,
 		);
 	}
 
