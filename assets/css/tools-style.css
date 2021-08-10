@@ -1,0 +1,40 @@
+.wps-intro {
+    margin-bottom:30px;
+}
+
+.wps-ui-textarea,
+.wps-ui-checkbox {
+    display:block;
+    margin:20px 0;
+}
+
+.wps-ui-textarea > span {
+    display:block;
+    margin-bottom: 10px;
+    font-weight:bold;
+}
+
+.wps-ui-textarea textarea {
+    min-width:420px;
+    resize:none;
+}
+
+.wps-ui-textarea .required {
+    color:red;
+}
+
+.wps-ui-checkbox span {
+    font-weight:bold;
+}
+
+.wps-ui-checkbox .wps-short-note {
+    display:block;
+    margin-top:2px;
+    color:gray;
+    font-size:0.7rem;
+    font-weight:normal;
+}
+
+#wps-tools-form .wps-button {
+    padding:3px 15px;
+}

@@ -24,15 +24,18 @@ class Tool_Model {
 	 */
 	public static function set_option( $params ) {
 		// Replace all site's options.
-		if ( is_multisite() && is_super_admin() && ! empty( $params['overwrite'] ) ) {
+		if ( is_multisite() && is_super_admin() && ! empty( $params['status_overwrite'] ) && 'overwrite' === $params['status_overwrite'] ) {
 			global $wpdb;
+
+			// Remove key.
+			unset( $params['status_overwrite'] );
 
 			// Get blogs.
 			$blogs = $wpdb->get_results( "SELECT blog_id FROM {$wpdb->blogs}", ARRAY_A );
 
 			if ( ! empty( $blogs ) ) {
 				foreach ( $blogs as $blog ) {
-					switch_to_blog( $blog['blog_id'] ); delete_option( 'option_name' );
+					switch_to_blog( $blog['blog_id'] );
 
 					// Overwrite option.
 					update_option( WP_POST_STATUS_PREFIX . 'option', $params );

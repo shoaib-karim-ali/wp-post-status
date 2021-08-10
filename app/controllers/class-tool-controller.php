@@ -20,6 +20,13 @@ if ( ! defined( 'WPINC' ) ) {
 class Tool_Controller {
 
 	/**
+	 * Message after form is processed.
+	 *
+	 * @var string $notice_message
+	 */
+	private $notice_message = null;
+
+	/**
 	 * Register hooks.
 	 */
 	public function register() {
@@ -30,6 +37,10 @@ class Tool_Controller {
 	 * Register page.
 	 */
 	public function register_page() {
+
+		// Handle form submission.
+		$this->handle_submit();
+
 		add_submenu_page(
 			'tools.php',
 			'Post Status',
@@ -44,32 +55,77 @@ class Tool_Controller {
 	 * Rnder the page.
 	 */
 	public function render() {
+		// Get option value.
+		$option_value = Tool_Model::get_option();
+
+		include WP_POST_STATUS_DIR . 'app/views/tools.php';
+	}
+
+	/**
+	 * Handle form submission.
+	 */
+	public function handle_submit() {
 		if ( ! empty( $_POST ) ) {
 			// Get user.
 			$user = wp_get_current_user();
 
 			// Check if user is not an administrator.
-			if ( ! ( is_super_admin() || in_array( 'administrator', $user->roles ) ) ) {
+			if ( ! ( is_super_admin() || in_array( 'administrator', $user->roles, true ) ) ) {
 				wp_die( 'You are not allowed!' );
 			}
 
 			// Verify nonce.
 			check_admin_referer( 'wp_post_status_tools_field', 'tools_field' );
 
-			if ( ! empty( $_POST['status_text'] ) ) {
-				Tool_Model::set_option(
-					array(
-						'status_text'       => sanitize_textarea_field( $_POST['status_text'] ),
-						'user_display_name' => ucwords( $user->display_name ),
-						'overwrite'         => is_multisite() && is_super_admin() && ! empty( $_POST['overwrite'] ) ? true : false,
-					)
-				);
+			// Prepare status option.
+			$status_option = array(
+				'status_text'         => ! empty( $_POST['status_text'] ) ? sanitize_textarea_field( wp_unslash( $_POST['status_text'] ) ) : '',
+				'status_display_name' => ucwords( $user->display_name ),
+			);
+
+			// Validate 'overwrite' data.
+			if (
+				is_multisite()
+				&& is_super_admin()
+				&& ! empty( $_POST['status_overwrite'] )
+				&& 'overwrite' === $_POST['status_overwrite']
+			) {
+				$status_option['status_overwrite'] = 'overwrite';
+			} else {
+				$status_option['status_overwrite'] = 'no';
+			}
+
+			// Update status option.
+			Tool_Model::set_option( $status_option );
+
+			// Show notice.
+			if ( 'overwrite' === $status_option['status_overwrite'] ) {
+				add_action( 'admin_notices', array( $this, 'add_update_status_overwrite_notice' ) );
+			} else {
+				add_action( 'admin_notices', array( $this, 'add_update_status_notice' ) );
 			}
 		}
+	}
 
-		// Get option value.
-		$option_value = Tool_Model::get_option();
-var_dump( get_current_blog_id(), $option_value );
-		include WP_POST_STATUS_DIR . 'app/views/tools.php';
+	/**
+	 * Singlesite notice, when status is add/updated successfully.
+	 */
+	public function add_update_status_notice() {
+		?>
+		<div class="updated notice is-dismissible">
+			<p><?php esc_html_e( 'Your status is updated and it is shown on admin dashboard.', 'wp-post-status' ); ?></p>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Multisite notice, when status is add/updated successfully.
+	 */
+	public function add_update_status_overwrite_notice() {
+		?>
+		<div class="updated notice is-dismissible">
+			<p><?php esc_html_e( 'Your status is updated and it is shown on admin dashboard. All the subsite status are overwrote.', 'wp-post-status' ); ?></p>
+		</div>
+		<?php
 	}
 }

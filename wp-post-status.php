@@ -107,7 +107,7 @@ if ( ! class_exists( 'WP_Post_Status' ) ) {
 			// Get the relative class name.
 			$class_name = substr( $class, $str_len );
 
-			$path = explode( '\\', strtolower( str_replace( '_', '-', $class_name ) ) );
+			$path      = explode( '\\', strtolower( str_replace( '_', '-', $class_name ) ) );
 			$file_name = 'class-' . array_pop( $path ) . '.php';
 			$file_path = WP_POST_STATUS_DIR . implode( '/', $path ) . '/' . $file_name;
 
@@ -123,7 +123,7 @@ if ( ! class_exists( 'WP_Post_Status' ) ) {
 		private function init() {
 			// Initialize all the core classes of the plugin.
 			if ( class_exists( 'WP_Post_Status\\Core\\Init' ) ) {
-				WP_Post_Status\Core\Init::register_services();
+				WP_Post_Status\Core\Init::boot();
 			}
 		}
 	}

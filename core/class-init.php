@@ -18,6 +18,27 @@ if ( ! defined( 'WPINC' ) ) {
 class Init {
 
 	/**
+	 * Filters and Actions.
+	 */
+	public static function boot() {
+		// Register services.
+		self::register_services();
+
+		add_action( 'admin_init', array( __CLASS__, 'plugin_i18n' ) );
+	}
+
+	/**
+	 * Load the translation files.
+	 */
+	public static function plugin_i18n() {
+		load_plugin_textdomain(
+			'wp-post-status',
+			false,
+			dirname( WP_POST_STATUS_BASENAME ) . '/languages'
+		);
+	}
+
+	/**
 	 * Set of classes
 	 *
 	 * @return array Full list of classes
@@ -25,13 +46,14 @@ class Init {
 	public static function get_services() {
 		return array(
 			\WP_Post_Status\App\Controllers\Tool_Controller::class,
+			\WP_Post_Status\Core\Enqueue::class,
 		);
 	}
 
 	/**
 	 * Initialize classes.
 	 */
-	public static function register_services() {
+	private static function register_services() {
 		foreach ( self::get_services() as $class ) {
 			$service = self::instantiate( $class );
 
