@@ -1,0 +1,68 @@
+# Copyright (C) 2021 Shoaib Ali
+# This file is distributed under the GPL v2.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Post Status 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-post-status\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-08-11T13:26:59+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.5.0\n"
+"X-Domain: wp-post-status\n"
+
+#. Plugin Name of the plugin
+msgid "WP Post Status"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "https://bitbucket.org/shoaib-karim-ali"
+msgstr ""
+
+#. Description of the plugin
+msgid "This plugin allows posting a status message on the WordPress admin dashboard page."
+msgstr ""
+
+#. Author of the plugin
+msgid "Shoaib Ali"
+msgstr ""
+
+#: app/controllers/class-tool-controller.php:116
+msgid "Your status is updated and it is shown on admin dashboard."
+msgstr ""
+
+#: app/controllers/class-tool-controller.php:127
+msgid "Your status is updated and it is shown on admin dashboard. All the subsite status are overwrote."
+msgstr ""
+
+#: app/views/dashboard-widget.php:18
+msgid "No status is set yet."
+msgstr ""
+
+#: app/views/dashboard-widget.php:20
+msgid "Follow the link to"
+msgstr ""
+
+#: app/views/dashboard-widget.php:21
+msgid "add a status"
+msgstr ""
+
+#: app/views/tools.php:14
+msgid "Post Status"
+msgstr ""
+
+#: app/views/tools.php:19
+msgid "Your Status"
+msgstr ""
+
+#: app/views/tools.php:28
+msgid "Overwrite subsite status"
+msgstr ""
+
+#: core/class-init.php:49
+msgid "Post status"
+msgstr ""

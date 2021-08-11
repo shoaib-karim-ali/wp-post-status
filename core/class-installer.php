@@ -55,6 +55,25 @@ class Installer {
 	 * Handle plugin uninstallation.
 	 */
 	public function uninstall() {
+		if ( is_multisite() ) {
+			global $wpdb;
 
+			$offset = 0;
+			$limit  = 100;
+			while ( $blogs = $wpdb->get_results( "SELECT blog_id FROM {$wpdb->blogs} LIMIT $offset, $limit", ARRAY_A ) ) {
+				if ( $blogs ) {
+					foreach ( $blogs as $blog ) {
+						switch_to_blog( $blog['blog_id'] );
+
+						delete_option( 'wp_post_status_option' );
+
+						restore_current_blog();
+					}
+				}
+				$offset += $limit;
+			}
+		} else {
+			delete_option( 'wp_post_status_option' );
+		}
 	}
 }

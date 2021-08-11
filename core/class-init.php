@@ -24,7 +24,9 @@ class Init {
 		// Register services.
 		self::register_services();
 
+		// Actions and filters.
 		add_action( 'admin_init', array( __CLASS__, 'plugin_i18n' ) );
+		add_filter( 'plugin_action_links_' . WP_POST_STATUS_BASENAME, array( __CLASS__, 'add_plugin_page_links' ) );
 	}
 
 	/**
@@ -39,6 +41,16 @@ class Init {
 	}
 
 	/**
+	 * Add custom links to plugin page.
+	 *
+	 * @param array $links An array of plugin links.
+	 */
+	public static function add_plugin_page_links( $links ) {
+		$links[] = '<a href="' . menu_page_url( 'post-status', false ) . '">' . esc_html__( 'Post status', 'wp-post-status' ) . '</a>';
+		return $links;
+	}
+
+	/**
 	 * Set of classes
 	 *
 	 * @return array Full list of classes
@@ -46,6 +58,7 @@ class Init {
 	public static function get_services() {
 		return array(
 			\WP_Post_Status\App\Controllers\Tool_Controller::class,
+			\WP_Post_Status\App\Controllers\Dashboard_Controller::class,
 			\WP_Post_Status\Core\Enqueue::class,
 		);
 	}

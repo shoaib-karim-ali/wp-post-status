@@ -128,3 +128,4 @@ if ( ! class_exists( 'WP_Post_Status' ) ) {
 		}
 	}
 }
+
