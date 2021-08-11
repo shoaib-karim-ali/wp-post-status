@@ -26,8 +26,10 @@ class Enqueue {
 	public function enqueue( $hook ) {
 		// Load style & script for plugin's tools page.
 		if ( 'tools_page_post-status' === $hook ) {
-			wp_enqueue_style( 'wp-post-status-style', WP_POST_STATUS_URL . 'assets/css/tools-style.css', array(), WP_POST_STATUS_VERSION );
-			wp_enqueue_script( 'wp-post-status-script', WP_POST_STATUS_URL . 'assets/js/tools-script.js', array( 'jquery' ), WP_POST_STATUS_VERSION, true );
+			wp_enqueue_style( 'wp-post-status-tools-style', WP_POST_STATUS_URL . 'assets/css/tools-style.css', array(), WP_POST_STATUS_VERSION );
+			wp_enqueue_script( 'wp-post-status-tools-script', WP_POST_STATUS_URL . 'assets/js/tools-script.js', array( 'jquery' ), WP_POST_STATUS_VERSION, true );
+		} elseif ( is_admin() && 'index.php' === $hook ) {
+			wp_enqueue_style( 'wp-post-status-dashboard-style', WP_POST_STATUS_URL . 'assets/css/dashboard-style.css', array(), WP_POST_STATUS_VERSION );
 		}
 	}
 }

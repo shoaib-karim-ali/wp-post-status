@@ -33,8 +33,14 @@ Yes, this plugin is intended to use on both singlesite and multisite.
 1. To add a status goto Tools > WP Status.
 2. Options available to website administrators.
 3. Overwrite feature is available for Network admin in a multisite.
+4. Overview of how the status is displayed on dashboard.
+5. New features added to plugin.
 
 == Changelog ==
+
+= 1.1.0 =
+* Add feature to show/hide Status on dashboard.
+* Add feature to show/hide user's name under the status.
 
 = 1.0.0 =
 * Initial release.
@@ -45,4 +51,4 @@ Yes, this plugin is intended to use on both singlesite and multisite.
 New features are added to this version. Upgrade to get new features.
 
 = 1.0.0 =
-* Initial release.
+Initial release.

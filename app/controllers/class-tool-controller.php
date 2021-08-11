@@ -30,6 +30,14 @@ class Tool_Controller {
 	 * Register hooks.
 	 */
 	public function register() {
+		// Get user.
+		$user = wp_get_current_user();
+
+		// Show settings page to only site admin or network admin.
+		if ( ! ( is_super_admin() || in_array( 'administrator', $user->roles, true ) ) ) {
+			return;
+		}
+
 		add_action( 'admin_menu', array( $this, 'register_page' ) );
 	}
 
@@ -65,7 +73,7 @@ class Tool_Controller {
 	 * Handle form submission.
 	 */
 	public function handle_submit() {
-		if ( ! empty( $_POST ) ) {
+		if ( ! empty( $_POST['wps_tools_field'] ) && wp_verify_nonce( $_POST['wps_tools_field'], 'wp_post_status_tools_nonce' ) ) {
 			// Get user.
 			$user = wp_get_current_user();
 
@@ -75,12 +83,14 @@ class Tool_Controller {
 			}
 
 			// Verify nonce.
-			check_admin_referer( 'wp_post_status_tools_field', 'tools_field' );
+			check_admin_referer( 'wp_post_status_tools_nonce', 'wps_tools_field' );
 
 			// Prepare status option.
 			$status_option = array(
-				'status_text'         => ! empty( $_POST['status_text'] ) ? sanitize_textarea_field( wp_unslash( $_POST['status_text'] ) ) : '',
-				'status_display_name' => ucwords( $user->display_name ),
+				'status_text'             => ! empty( $_POST['status_text'] ) ? sanitize_textarea_field( wp_unslash( $_POST['status_text'] ) ) : '',
+				'display_name_visibility' => ! empty( $_POST['display_name_visibility'] ) && 'show' === $_POST['display_name_visibility'] ? 'show' : 'hide',
+				'status_visibility'       => ! empty( $_POST['status_visibility'] ) && 'show' === $_POST['status_visibility'] ? 'show' : 'hide',
+				'status_display_name'     => ucwords( $user->display_name ),
 			);
 
 			// Validate 'overwrite' data.

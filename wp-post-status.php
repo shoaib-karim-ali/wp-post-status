@@ -30,7 +30,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 if ( ! defined( 'WP_POST_STATUS_VERSION' ) ) {
-	define( 'WP_POST_STATUS_VERSION', '1.0.0' );
+	define( 'WP_POST_STATUS_VERSION', '1.1.0' );
 }
 if ( ! defined( 'WP_POST_STATUS_BASENAME' ) ) {
 	define( 'WP_POST_STATUS_BASENAME', plugin_basename( __FILE__ ) );

@@ -23,7 +23,13 @@ class Dashboard_Controller {
 	 * Register hooks.
 	 */
 	public function register() {
-		add_action( 'wp_dashboard_setup', array( $this, 'add_widget' ) );
+		// Get option value.
+		$option_value = Tool_Model::get_option();
+
+		// Show/hide status on dashboard.
+		if ( empty( $option_value['status_visibility'] ) || 'show' === $option_value['status_visibility'] ) {
+			add_action( 'wp_dashboard_setup', array( $this, 'add_widget' ) );
+		}
 	}
 
 	/**

@@ -3,12 +3,14 @@
 }
 
 .wps-ui-textarea,
-.wps-ui-checkbox {
+.wps-ui-checkbox,
+.wps-ui-radio {
     display:block;
-    margin:20px 0;
+    margin:30px 0;
 }
 
-.wps-ui-textarea > span {
+.wps-ui-textarea > span,
+.wps-ui-radio > span {
     display:block;
     margin-bottom: 10px;
     font-weight:bold;
@@ -37,4 +39,13 @@
 
 #wps-tools-form .wps-button {
     padding:3px 15px;
+}
+
+#wps-tools-form .wps-font-weight-normal { 
+    font-weight:normal;
+}
+
+#wps-tools-form .wps-inline-block {
+    display:inline-block;
+    margin-right:20px;
 }
