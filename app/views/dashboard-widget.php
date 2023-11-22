@@ -26,10 +26,10 @@ if ( ! defined( 'WPINC' ) ) {
 		<?php endif; ?>
 	<?php else : ?>
 		<p>
-			<?php esc_html_e( 'No status is set yet.', 'wp-post-status' ); ?>
+			<?php _e( 'No status is set yet.', 'wp-post-status' ); ?>
 			<?php if ( is_admin() ) : ?>
-				<?php esc_html_e( 'Follow the link to', 'wp-post-status' ); ?>
-				<a href="<?php menu_page_url( 'post-status' ); ?>"><?php esc_html_e( 'add a status', 'wp-post-status' ); ?></a>
+				<?php _e( 'Follow the link to', 'wp-post-status' ); ?>
+				<a href="<?php menu_page_url( 'post-status' ); ?>"><?php _e( 'add a status', 'wp-post-status' ); ?></a>
 			<?php endif; ?>
 		</p>
 	<?php endif; ?>
