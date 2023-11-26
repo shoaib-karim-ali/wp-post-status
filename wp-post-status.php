@@ -76,6 +76,42 @@ if ( ! class_exists( 'WP_Post_Status' ) ) {
 		}
 
 		/**
+		 * Prevent cloning of the instance.
+		 *
+		 * @throws Exception
+		 */
+		private function __clone() {
+			throw new Exception("Cloning is prohibited for Singleton instances.");
+		}
+
+		/**
+		 * Prevent unserialization of the instance.
+		 *
+		 * @throws Exception
+		 */
+		private function __wakeup() {
+			throw new Exception("Unserialization is prohibited for Singleton instances.");
+		}
+
+		/**
+		 * Prevent serialization of the instance.
+		 *
+		 * @throws Exception
+		 */
+		private function __sleep() {
+			throw new Exception("Serialization is prohibited for Singleton instances.");
+		}
+
+		/**
+		 * Prevent using the instance as a function.
+		 *
+		 * @throws Exception
+		 */
+		public function __invoke() {
+			throw new Exception("Using the instance as a function is prohibited.");
+		}
+
+		/**
 		 * Return the plugin instance.
 		 *
 		 * @return WP_Post_Status
